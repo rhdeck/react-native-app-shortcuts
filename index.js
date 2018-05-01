@@ -29,11 +29,24 @@ const addShortcut = async (key, label, icon, cb) => {
     icon = null;
   }
   await RNAS.addShortcut(key, label, icon);
+  linkShortcut(key, cb);
+};
+const removeShortcut = async key => {
+  unlinkShortcut(key);
+  return await RNAS.removeShortcut(key);
+};
+const linkShortcut = (key, cb) => {
   listeners[key] = cb;
   startListening();
 };
-const removeShortcut = key => {
+const unlinkShortcut = key => {
   delete listeners[key];
   checkListeners();
 };
-export { addShortcut, removeShortcut, stopListening };
+export {
+  addShortcut,
+  removeShortcut,
+  linkShortcut,
+  unlinkShortcut,
+  stopListening
+};
