@@ -15,8 +15,12 @@ class react_native_app_shortcuts: RCTEventEmitter {
     //Demonstrate a basic promise-based function in swift
     @objc func addShortcut(_ key:String, label: String, icon: String?, success: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
         let newShortcut = UIMutableApplicationShortcutItem(type: key, localizedTitle: label)
-        if let i = icon, let si = iconList[i] {
-            newShortcut.icon = UIApplicationShortcutIcon(type: si)
+        if let i = icon {
+            if let si = iconList[i] {
+                newShortcut.icon = UIApplicationShortcutIcon(type: si)
+            } else {
+                //@TODO Look for the file reference? 
+            }
         }
         _ = RNShortcuts.main.addShortcut(newShortcut) { data in
             self.sendEvent(withName: "react_native-app-shortcuts", body: [
