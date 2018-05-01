@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+.DS_Store
+ios/react_native-app-shortcuts.xcodeproj/project.xcworkspace/contents.xcworkspacedata
