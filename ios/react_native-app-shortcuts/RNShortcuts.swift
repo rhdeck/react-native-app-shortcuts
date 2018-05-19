@@ -2,7 +2,7 @@ import Foundation
 import RNSRegistry
 class RNShortcuts {
     public static var main:RNShortcuts = RNShortcuts()
-    public func addShortcut(_ newShortcut: UIApplicationShortcutItem, callback: (Any)->Bool) -> Bool {
+    public func addShortcut(_ newShortcut: UIApplicationShortcutItem, callback: @escaping (Any)->Bool) -> Bool {
         _ = removeShortcut(newShortcut.type)
         let existingShortcuts = UIApplication.shared.shortcutItems ?? []
         var newShortcuts = existingShortcuts
@@ -11,7 +11,7 @@ class RNShortcuts {
         linkShortcut(type: "shortcut." + newShortcut.type, callback: callback)
         return true
     }
-    public func linkShortcut(type:String, callback: (Any)->Bool) {
+    public func linkShortcut(type:String, callback: @escaping (Any)->Bool) {
         let _ = RNSMainRegistry.main.addEvent(type: "shortcut." + type, key: type, callback: callback )
     }
     public func removeShortcut(_ type:String) -> Bool {
