@@ -4,10 +4,10 @@ import RNSRegistry
 class react_native_app_shortcuts: RCTEventEmitter {
     override init() {
         super.init()
-        let _ = RNSMainRegistry.main.addEvent(type: "shortcut.app.reset", key: "resetBundle") { data in
-            if RNSMainRegistry.main.triggerEvent("app.reset", data: data) {
-                RNSMainRegistry.main.data.removeValue(forKey: "shortcuttriggered")
-                //RNSMainRegistry.main.data.removeValue(forKey: "shortcut.app.reset")
+        let _ = RNSMainRegistry.getMain().addEvent(type: "shortcut.app.reset", key: "resetBundle") { data in
+            if RNSMainRegistry.getMain().triggerEvent("app.reset", data: data) {
+                RNSMainRegistry.getMain().data.removeValue(forKey: "shortcuttriggered")
+                //RNSMainRegistry.getMain().data.removeValue(forKey: "shortcut.app.reset")
             }
             return true
         }
