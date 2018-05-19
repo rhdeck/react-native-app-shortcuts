@@ -8,19 +8,25 @@ class RNShortcuts {
         var newShortcuts = existingShortcuts
         newShortcuts.append(newShortcut)
         UIApplication.shared.shortcutItems = newShortcuts
-        _ = RNSMainRegistry.main.addEvent(type: "shortcut." + newShortcut.type, key: newShortcut.type, callback: callback)
+        linkShortcut(type: "shortcut." + newShortcut.type, callback: callback)
         return true
+    }
+    public func linkShortcut(type:String, callback: (Any)->Bool) {
+        let _ = RNSMainRegistry.main.addEvent(type: "shortcut." + type, key: type, callback: callback )
     }
     public func removeShortcut(_ type:String) -> Bool {
         let existingShortcuts = UIApplication.shared.shortcutItems ?? []
         guard existingShortcuts.count > 0 else { return true }
         UIApplication.shared.shortcutItems = existingShortcuts.filter() { sc in
             if sc.type == type {
-                RNSMainRegistry.main.removeEvent(type: "shortcut." + type, key: type)
+                unlinkShortcut(type: type)
                 return false
             }
             return true
         }
         return true
+    }
+    public func unlinkShortcut(type: String) {
+        RNSMainRegistry.main.removeEvent(type: "shortcut." + type, key: type)
     }
 }

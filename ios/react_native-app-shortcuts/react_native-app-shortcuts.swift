@@ -35,6 +35,20 @@ class react_native_app_shortcuts: RCTEventEmitter {
         _ = RNShortcuts.main.removeShortcut(key)
         success(key)
     }
+    @objc func linkShortcut(_ key: String, success: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+        RNShortcuts.main.linkShortcut(type: key) { data in
+            self.sendEvent(withName: "react_native-app-shortcuts", body: [
+                "type": key,
+                "data": data
+            ])
+            return true
+        }
+        success(key)
+    }
+    @objc func unlinkShortcut(_ key: String, success: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+        RNShortcuts.main.unlinkShortcut(type: key)
+        success(key)
+    }
     //Note that any event name used in sendEvent above needs to be in this array.
     override func supportedEvents() -> [String]! {
         return ["react_native-app-shortcuts"]
