@@ -89,7 +89,7 @@ class react_native_app_shortcuts: RCTEventEmitter {
             "icons": iconList.keys
         ];
     }
-//    override class func requiresMainQueueSetup() -> Bool {
-//        return false;
-//    }
+    override class func requiresMainQueueSetup() -> Bool {
+        return true;
+    }
 }
