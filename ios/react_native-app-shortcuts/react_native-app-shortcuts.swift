@@ -7,7 +7,7 @@ class react_native_app_shortcuts: RCTEventEmitter {
         let _ = RNSMainRegistry.main.addEvent(type: "shortcut.app.reset", key: "resetBundle") { data in
             if RNSMainRegistry.main.triggerEvent("app.reset", data: data) {
                 RNSMainRegistry.main.data.removeValue(forKey: "shortcuttriggered")
-                RNSMainRegistry.main.data.removeValue(forKey: "shortcut.app.reset")
+                //RNSMainRegistry.main.data.removeValue(forKey: "shortcut.app.reset")
             }
             return true
         }
@@ -89,7 +89,7 @@ class react_native_app_shortcuts: RCTEventEmitter {
             "icons": iconList.keys
         ];
     }
-    override class func requiresMainQueueSetup() -> Bool {
-        return false;
-    }
+//    override class func requiresMainQueueSetup() -> Bool {
+//        return false;
+//    }
 }
