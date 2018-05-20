@@ -12,7 +12,7 @@ class RNShortcuts {
         return true
     }
     public func linkShortcut(type:String, callback: @escaping (Any)->Bool) {
-        let _ = RNSMainRegistry.getMain().addEvent(type: "shortcut." + type, key: type, callback: callback )
+        RNSMainRegistry.addEvent(type: "shortcut." + type, key: type, callback: callback )
     }
     public func removeShortcut(_ type:String) -> Bool {
         let existingShortcuts = UIApplication.shared.shortcutItems ?? []
@@ -27,6 +27,6 @@ class RNShortcuts {
         return true
     }
     public func unlinkShortcut(type: String) {
-        RNSMainRegistry.getMain().removeEvent(type: "shortcut." + type, key: type)
+        RNSMainRegistry.removeEvent(type: "shortcut." + type, key: type)
     }
 }
